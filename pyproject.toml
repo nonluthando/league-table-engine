@@ -1,0 +1,44 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "football-standings"
+version = "0.0.1"
+description = "Football league standings CLI: reads match results from CSV and outputs standings as CSV."
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = []
+
+[project.scripts]
+football-standings = "football_standings.cli:main"
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8",
+    "ruff>=0.6",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"
+
+[tool.ruff]
+target-version = "py39"
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+# Practical checks only, per CLAUDE.md: undefined names, unused
+# imports/variables, disorganized imports, and overly complex functions.
+# Not used for style opinions (line length, blank lines, naming).
+select = [
+    "F",   # pyflakes: undefined names, unused imports/variables
+    "I",   # isort: import sorting
+    "C90", # mccabe: flag functions that are too complex to reason about
+]
+
+[tool.ruff.lint.mccabe]
+max-complexity = 10
