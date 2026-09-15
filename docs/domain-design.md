@@ -46,7 +46,10 @@ stored):
 
 - `played` = `won + drawn + lost`
 - `points` = `won * 2 + drawn * 1` (see Points System below)
-- `goal_average` = `goals_for / goals_against`
+- `goal_average` = `goals_for / max(goals_against, 1)` — dividing by
+  1 instead of 0 when a team has conceded nothing, rather than
+  raising `ZeroDivisionError` (see resolution below; this was
+  originally left unresolved and was settled during implementation)
 
 `won`/`drawn`/`lost`/`goals_for`/`goals_against` are stored (not
 further derived from a raw match list) because they are already the
@@ -146,6 +149,15 @@ has no custom exception type: it trusts that any `Match` handed to it
 is already valid, per CLAUDE.md's "only validate at system boundaries"
 principle.
 
+## Resolved during implementation
+
+**`goal_average` when `goals_against` is 0.** Writing the first tests
+against a clean-sheet scoreline (e.g. 2–0) surfaced that this is a
+common case, not a rare edge case, and blocked implementing the sort
+key. Resolved: `goal_average = goals_for / max(goals_against, 1)` —
+divide by 1 instead of 0, no other special-casing. See `TeamStanding`
+above.
+
 ## Unresolved / open questions
 
 These are explicitly **not decided** — flagging them rather than
@@ -155,9 +167,6 @@ guessing:
    hierarchy "and exit codes," but exit codes are a CLI-layer concern
    that can't really be fixed until the CLI milestone. Not addressed
    here.
-2. **`goal_average` when `goals_against` is 0.** Division by zero is
-   possible (a team that has conceded no goals). Not yet decided how
-   `goal_average` should behave in that case.
 
 ## Deferred to file-specific design (not decided here, on purpose)
 
