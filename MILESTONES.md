@@ -25,7 +25,6 @@ Research and document the 1974/75 English First Division rules:
 - Tiebreak criteria (full order, not just the first rule)
 - Output column set and order
 - Input CSV schema
-- Source the real match data and verified expected standings
 
 **Pass criteria:** all domain rules documented with sources; no code
 written yet.
@@ -64,6 +63,9 @@ Implement CSV reading and writing:
 - `csv_writer.py` — write `TeamStanding` objects to CSV format
 - Unit tests using in-memory streams (`io.StringIO`), not real files
 - Both operate on file-like objects only (no path-opening)
+- Create `data/week10_1974_75.csv` and begin filling it in with sourced
+  match data; it does not need to be complete or fully verified yet —
+  just present, in the agreed schema, with real (not placeholder) rows
 
 **Pass criteria:** reader/writer tests pass; reading real
 `week10_1974_75.csv` produces `Match` objects; `ruff check` passes.
@@ -104,6 +106,9 @@ Finalize everything for submission:
 - `AI_REFLECTION.md` written (real AI disagreement/decision moment)
 - `.claude/` and `ai/` folders populated with session data and
   conversation exports
+- Ensure `data/week10_1974_75.csv` is completely and accurately filled
+  in, and `data/expected_standings.csv` reflects verified historical
+  standings
 - Full test suite passes from a clean clone
 - `ruff check` passes on entire project
 - Final read-through against PDF requirements
