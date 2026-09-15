@@ -213,3 +213,15 @@ assumed or hard-coded until addressed as a separate step:
 
 Do not hard-code assumptions about any of the above while working on
 architecture, scaffolding, or non-domain-rule code.
+
+## Change and Permission Policy
+
+* Discussion is not approval. A question, suggestion, idea, or possible approach does not constitute permission to act on it.
+* Do not assume I want a proposed action carried out.
+* Before performing research, making changes, creating files, modifying code, adding dependencies, changing configuration, or making design decisions, ask for my explicit approval unless I have specifically requested that action.
+* If I ask you to explain, evaluate, or discuss something, provide the analysis without taking action based on it.
+* Do not infer requirements or decisions that I have not explicitly made. Treat unresolved questions as unresolved.
+* Do not silently improve, refactor, research, implement, or extend the project beyond the scope I explicitly requested.
+* You may perform read-only inspection necessary to answer my explicit request, but do not use that inspection as permission to make changes or take additional actions.
+* Do not create commits, push changes, create/delete branches, merge branches, or perform destructive Git operations without explicit approval.
+* When an action could reasonably be interpreted in more than one way, stop and ask rather than choosing an interpretation yourself.
