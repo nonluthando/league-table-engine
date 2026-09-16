@@ -1,19 +1,13 @@
 # AI Reflection
 
-A running record of how AI assistance was used on this project, and the
-non-obvious decisions made along the way. Required submission artefact
-per `CLAUDE.md`.
+The biggest lesson I learned from this assessment was that AI needs to be guided and given clear guardrails. Claude Code is capable of taking a discussion and turning it into action very quickly. During the project, there were situations where we were discussing a possible task, such as reconstructing the historical match data, and Claude began moving towards carrying it out before I had explicitly approved it. This made me realise that an AI coding agent can move from discussion to action faster than I might expect. I responded by adding explicit rules to `CLAUDE.md`, including that discussion is not approval, unresolved requirements should not be assumed, and research, implementation, configuration changes and Git operations require explicit approval. This helped me keep control of the development process while still allowing Claude to work independently when I had actually delegated a task.
 
-## Milestone 0 — Project scaffolding
+The historical data research also showed me why guardrails are important for information, not just actions. I instructed Claude not to assume that data sourced from external websites was automatically correct and to flag information that needed verification. This proved useful when some fixtures initially appeared to be duplicate or incorrectly dated. Further research showed that several of these were actually genuine reciprocal fixtures played unusually close together, so what initially looked like a data error was not necessarily an error. In another case, Claude found conflicting sources for the Coventry City vs Burnley match: one source reported Coventry City 1-3 Burnley, while another reported Burnley 3-0 Coventry and also disagreed on the venue. Rather than silently choosing one result, Claude flagged the conflict for investigation. I was then able to verify the information and correct the record. This showed me that AI is useful for identifying information that deserves attention, but its output and its sources still need to be validated by the developer.
 
-- Set up the layered package structure (`cli.py`, `app.py`, `domain.py`,
-  `csv_reader.py`, `csv_writer.py`) with module-level docstrings stating
-  each layer's responsibility and boundary, but no logic — architecture
-  only, per the phased design process in `CLAUDE.md`.
-- Configured `pytest` (via `pyproject.toml`, `testpaths = ["tests"]`).
-- Configured `ruff` to check only for undefined names, unused
-  imports/variables, disorganized imports, and functions that are too
-  complex (mccabe), matching `CLAUDE.md`'s explicit instruction that
-  ruff is not used for style opinions such as line length.
-- No domain rules, CSV schema, output format, or OOD/LLD decisions were
-  made at this stage — those are explicitly deferred to later phases.
+Another important lesson was that working with AI is inherently iterative. The initial development plan was not treated as fixed. The difficulty of reconstructing the historical football data changed how I wanted to organise the milestones, so I adjusted the plan rather than continuing with an approach that was becoming impractical. I also revisited architectural and design decisions as my understanding of the requirements developed. This made the process less about trying to produce the perfect plan at the beginning and more about making a reasonable decision, learning from the result, and refining the approach.
+
+I also learned that AI suggestions should be treated as proposals rather than decisions. Claude could provide useful explanations, research, alternative approaches and implementation ideas, but I still needed to decide whether those suggestions actually suited the assessment and the current state of the project. This was particularly important when requirements were ambiguous or when historical rules needed to be established. A confident or technically reasonable AI response was not by itself sufficient justification for making a project decision.
+
+Using multiple agents reinforced this lesson. Parallel agents allowed research and other tasks to be explored more quickly, but their outputs still needed to be reviewed and reconciled. Increasing the number of agents increased the amount of work that could be done in parallel; it did not remove the need for human oversight.
+
+Overall, I learned that effective AI-assisted development is not about giving the AI complete control. It is about creating a process where the AI can work quickly while remaining within clearly defined boundaries. Guardrails, verification and iteration became central to that process. As I encountered problems or learned more about the project, I could change the instructions, adjust the plan and refine how I delegated work. The AI became more useful as I became better at guiding it, while the important engineering decisions and responsibility for the final result remained with me.
